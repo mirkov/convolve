@@ -7,7 +7,7 @@
 
 (asdf:defsystem #:convolve-user
   :serial t
-  :description "Facilities for testing and development of 1D convolution"
+  :description "Examples of use of the convolve library"
   :author "Mirko Vukovic <mirko.vukovic@gmail.com>"
   :license "Boost Software License"
   :depends-on (#:lisp-unit

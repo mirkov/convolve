@@ -1,0 +1,4 @@
+2013-09-11  Mirko Vukovic  <mirko.vukovic@us.tel.com>
+
+	* convolve-user.asd (#:convolve-user): Fixed documentation
+
