@@ -1,0 +1,86 @@
+## Copyright Mirko Vukovic 2013.
+## Distributed under the Boost Software License, Version 1.0.
+## (See accompanying file ./LICENSE_1_0.txt or copy at
+## http://www.boost.org/LICENSE_1_0.txt)
+
+#### README.org
+
+
+#+title: Convolution
+
+* Background, aim, and status
+
+  While GSL and GSLL offer a family of routines for the discrete
+  fourier transform, there are no explicit subroutines for
+  convolving to vectors or matrices of the /same/ size.
+
+  This library defines an interface and provides routines for
+  convolving foreign vectors.  It should be easily extendable to
+  matrices.
+
+  It has not been partially tested on double-float vectors, not on
+  complex vectors.
+
+  This library depends on my map-grid library for some iterations
+  over grids.
+
+* Dictionary
+
+** /Function/ *convolve-1*
+   :PROPERTIES:
+   :ID:       86la7so0g8g0
+   :END:   
+
+*** Syntax
+    *convolve-1* /element-type grid1 grid2/ => /result/
+
+*** Arguments and values
+    - /element-type/ -- symbol
+    - /grid1/ and /grid2/ -- foreign vectors or matrices
+    - /result/ -- result of the convolution function
+
+*** Description
+    /convolve-1/ computes the convolution of /grid1/ with /grid2/
+
+    The grids are foreign vectors or matrices of same size.  The
+    resulting grid is of the same size as /grid1/ and /grid2/
+
+    /element-type/ is either 'float or 'complex.  If it is 'float,
+    then the input grids must store either single or double floats.
+    If it is 'complex, the input grids must store complex numbers of
+    either single or double floats.
+
+    /convolve-1/ is a low level function that performs the actual
+    computation using GSLL's DFT routines.  It does not do any
+    argument validity checking.  More user friendly is the [[id:o2yf0ro0g8g0][/Generic
+    function/ *convolve*]] that performs argument checks.
+
+** /Generic function/ *convolve*
+   :PROPERTIES:
+   :ID:       o2yf0ro0g8g0
+   :END:
+
+*** Syntax
+    *convolve* /grid1/ /grid2/ => /result/
+
+*** Arguments and Values
+    - /grid1/ and /grid2/ -- foreign vectors or matrices
+    - /result/ -- foreign vector or matrix
+
+*** Description
+    /convolve/ methods compute the convolution of /grid1/ with
+    /grid2/.
+
+    /grid1/ and /grid2/ can be one of the following ~grid~ classes:
+    ~vector-single-float~, ~vector-double-float~,
+    ~vector-complex-single-float~, ~vector-complex-double-float~
+
+    Both /grid1/ and /grid2/ must be of the same ~grid~ class and of
+    same size.  The methods check for grid size equality
+
+    Currently, there are no methods for matrix convolution.  These
+    can be added, but one should check that my ~map-grid~ utilities
+    operate correctly on matrices.
+
+    [[id:o2yf0ro0g8g0][convolve]] calls a lower level function [[id:86la7so0g8g0][convolve-1]] for actual
+    computation.  This latter function is also available to the user.
